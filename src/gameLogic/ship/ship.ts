@@ -8,7 +8,7 @@ class Ship {
     public direction: 'v' | 'h'
   ) {
     this.length = length;
-    this.parts = Array(this.length).fill(false);
+    this.parts = Array(this.length).fill(false); //true if damaged
     [this.row, this.column] = head;
     this.direction = direction;
   }
