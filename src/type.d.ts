@@ -1,27 +1,27 @@
 import Ship from './gameLogic/ship/ship';
 interface game {
-  board1: {
-    grid: grid;
-    hit: (position: [keyof grid, keyof grid]) => void;
-    placeShip: (
+  readonly board1: {
+    readonly grid: grid;
+    readonly hit: (position: [keyof grid, keyof grid]) => void;
+    readonly placeShip: (
       shiplength: number,
       position: [keyof grid, keyof grid],
       direction: 'v' | 'h'
-    ) => void;
-    isLost: boolean;
+    ) => 1 | undefined;
+    readonly isLost: boolean;
   };
-  board2: {
-    grid: grid;
-    hit: (position: [keyof grid, keyof grid]) => void;
-    placeShip: (
+  readonly board2: {
+    readonly grid: grid;
+    readonly hit: (position: [keyof grid, keyof grid]) => void;
+    readonly placeShip: (
       shiplength: number,
       position: [keyof grid, keyof grid],
       direction: 'v' | 'h'
-    ) => void;
-    isLost: boolean;
+    ) => 1 | undefined;
+    readonly isLost: boolean;
   };
-  playerTurn: 1 | 2;
-  isFinished: boolean;
+  readonly playerTurn: 1 | 2;
+  readonly isFinished: boolean;
 }
 
 type grid = {
@@ -36,3 +36,16 @@ type grid = {
   9: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
   10: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
 };
+
+type board = {
+  grid: grid;
+  placeShip(
+    shiplength: number,
+    position: [keyof grid, keyof grid],
+    direction: 'v' | 'h'
+  ): 1 | undefined;
+  hit(position: [keyof grid, keyof grid]): void;
+  isLost: boolean;
+};
+
+type RootState = game;
