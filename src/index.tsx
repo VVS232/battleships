@@ -5,7 +5,7 @@ import App from './App';
 import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import { createStore } from 'redux';
-import reducer from './store/reducer';
+import reducer from './store/reducers/reducer';
 
 const store = createStore(reducer);
 ReactDOM.render(

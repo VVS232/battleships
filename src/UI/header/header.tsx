@@ -8,7 +8,7 @@ export default function header(props: any) {
       <nav>
         <ul>
           <li>
-            <Link to="/game">Games</Link>
+            <Link to="/game">Game</Link>
           </li>
           <li>
             <Link to="/">Rules</Link>

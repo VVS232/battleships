@@ -1,3 +1,4 @@
+import Ship from './gameLogic/ship/ship';
 interface game {
   board1: {
     grid: grid;
@@ -7,6 +8,7 @@ interface game {
       position: [keyof grid, keyof grid],
       direction: 'v' | 'h'
     ) => void;
+    isLost: boolean;
   };
   board2: {
     grid: grid;
@@ -16,8 +18,10 @@ interface game {
       position: [keyof grid, keyof grid],
       direction: 'v' | 'h'
     ) => void;
+    isLost: boolean;
   };
   playerTurn: 1 | 2;
+  isFinished: boolean;
 }
 
 type grid = {

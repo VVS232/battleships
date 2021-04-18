@@ -1,0 +1,5 @@
+.game{
+    display: flex;
+    margin-top: 170px;
+    justify-content: space-evenly;
+}

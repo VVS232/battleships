@@ -47,7 +47,9 @@ export default function gameBoard() {
           (grid[row][column] as [Ship, number | 'hit' | 'sunk'])[1] = 'hit';
         }
       }
+      this.isLost = checkLost(this.grid);
     },
+    isLost: false,
   };
 }
 
@@ -122,7 +124,7 @@ function checkPlacePossibility(
   }
   if (direction === 'v') {
     for (let i = 0, r = row - 1; i <= shiplength + 1; i++, r++) {
-      for (let j = 0, c = column - 1; j <= column + 1; j++, c++) {
+      for (let j = 0, c = column - 1; j < 3; j++, c++) {
         if (
           r > 10 ||
           c > 10 ||
@@ -135,3 +137,34 @@ function checkPlacePossibility(
   }
   return true;
 }
+
+function checkLost(grid: grid) {
+  for (let row = 1; row < 11; row++) {
+    for (let col = 0; col < 10; col++) {
+      let gridCell = grid[row as keyof grid][col as keyof grid];
+      if (
+        gridCell === 'empty' ||
+        gridCell === 'miss' ||
+        gridCell[1] === 'sunk'
+      ) {
+        continue;
+      } else {
+        return false;
+      }
+    }
+  }
+  return true;
+}
+
+type grid = {
+  1: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  2: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  3: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  4: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  5: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  6: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  7: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  8: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  9: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+  10: ('empty' | 'miss' | [Ship, number | 'hit' | 'sunk'])[];
+};

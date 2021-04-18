@@ -73,3 +73,17 @@ test('does not allow to place ship not in the grid', () => {
   expect(board.placeShip(4, [8, 8], 'h')).toBe(1);
   expect(board.placeShip(4, [8, 2], 'v')).toBe(1);
 });
+
+test('checks if all ships sunk', () => {
+  board.placeShip(2, [3, 2], 'v');
+  board.placeShip(2, [3, 5], 'v');
+  console.log(board.grid);
+  expect(board.isLost).toBe(false);
+  board.hit([3, 2]);
+  expect(board.isLost).toBe(false);
+  board.hit([4, 2]);
+  expect(board.isLost).toBe(false);
+  board.hit([3, 5]);
+  board.hit([4, 5]);
+  expect(board.isLost).toBe(true);
+});
