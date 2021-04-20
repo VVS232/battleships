@@ -1,5 +1,6 @@
 import gameBoard from '../../gameLogic/gameboard/gameboard';
 import { game } from '../../type';
+import * as actions from '../actions';
 
 const initialState: game = {
   board1: gameBoard(),
@@ -12,7 +13,15 @@ initialState.board2.placeShipsRandomly();
 
 const reducer = (state: game = initialState, action: any): game => {
   switch (action.type) {
-    case '':
+    case actions.MAKE_SHOT:
+      const newState: game = {
+        board1: { ...state.board1 },
+        board2: { ...state.board2 },
+        playerTurn: state.playerTurn,
+        isFinished: state.isFinished,
+      };
+      newState.board2.hit(action.payload);
+      return newState;
       break;
 
     default:

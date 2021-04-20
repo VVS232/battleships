@@ -10,6 +10,7 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 
 const store = createStore(reducer, composeWithDevTools());
 
+export type AppDispatch = typeof store.dispatch;
 ReactDOM.render(
   <React.StrictMode>
     <Provider store={store}>

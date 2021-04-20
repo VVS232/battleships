@@ -1,2 +1,2 @@
 export const placeShip = 'place_ship';
-export const shoot = 'shoot';
+export const MAKE_SHOT = 'MAKE_SHOT';
