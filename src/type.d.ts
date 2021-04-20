@@ -25,10 +25,11 @@ type board = {
     shiplength: number,
     position: [keyof grid, keyof grid],
     direction: 'v' | 'h'
-  ): 1 | undefined;
+  ): 1 | 0;
   hit(position: [keyof grid, keyof grid]): void;
   isLost: boolean;
   shop: Array<{ length: number; direction: 'v' | 'h' }>;
+  placeShipsRandomly(this: board): void;
 };
 
 type RootState = game;

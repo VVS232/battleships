@@ -26,12 +26,13 @@ export default function gameBoard(): board {
       }
       if (direction === 'h') {
         placeHorizontally(ship, this.grid, position);
-        return;
+        return 0;
       }
       if (direction === 'v') {
         placeVertically(ship, this.grid, position);
-        return;
+        return 0;
       }
+      return 1;
     },
     hit(position: [keyof grid, keyof grid]) {
       let [row, column] = position;
@@ -93,6 +94,7 @@ export default function gameBoard(): board {
         direction: 'v',
       },
     ],
+    placeShipsRandomly: placeShipsRandomly,
   };
 }
 
@@ -153,11 +155,20 @@ function checkPlacePossibility(
   let [row, column] = position;
 
   if (direction === 'h') {
+    if (shiplength > 9 - column) {
+      return false;
+    }
     for (let i = 0, c = column - 1; i <= shiplength + 1; i++, c++) {
       for (let j = 0, r = row - 1; j < 3; j++, r++) {
+        if (r <= 0 || c < 0) {
+          continue;
+        }
+        if (r == 11) {
+          continue;
+        }
         if (
-          r > 11 ||
-          c > 11 ||
+          r > 10 ||
+          c > 9 ||
           grid[r as keyof grid][c as keyof grid] !== 'empty'
         ) {
           return false; //false if ship cannot be placed
@@ -166,11 +177,20 @@ function checkPlacePossibility(
     }
   }
   if (direction === 'v') {
+    if (shiplength > 10 - row) {
+      return false;
+    }
     for (let i = 0, r = row - 1; i <= shiplength + 1; i++, r++) {
       for (let j = 0, c = column - 1; j < 3; j++, c++) {
+        if (r <= 0 || c < 0) {
+          continue;
+        }
+        if (c == 10) {
+          continue;
+        }
         if (
           r > 10 ||
-          c > 10 ||
+          c > 9 ||
           grid[r as keyof grid][c as keyof grid] !== 'empty'
         ) {
           return false;
@@ -197,6 +217,24 @@ function checkLost(grid: grid) {
     }
   }
   return true;
+}
+
+function placeShipsRandomly(this: board) {
+  for (let i = 0; i < this.shop.length; ) {
+    if (this.shop[i] === undefined) {
+      break;
+    }
+    let isSucces;
+    do {
+      let directions: ['h', 'v'] = ['h', 'v'];
+      let direction = directions[Math.round(Math.random())];
+      let row = (Math.floor(Math.random() * (10 - 1 + 1)) + 1) as keyof grid;
+      let col = Math.floor(Math.random() * 10) as keyof grid;
+
+      isSucces = this.placeShip(this.shop[i].length, [row, col], direction);
+    } while (isSucces !== 0);
+    this.shop.shift();
+  }
 }
 
 type grid = {

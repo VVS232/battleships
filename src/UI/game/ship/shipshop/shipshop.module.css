@@ -9,4 +9,11 @@
 }
 .shipCell img{
     width: 100%;
+    
+}
+
+.ship{
+  
+    cursor: grab;
+
 }

@@ -13,9 +13,15 @@ function Board(props: props) {
     for (let key in props.board.grid) {
       let gridKey = Number(key) as keyof grid;
       props.board.grid[gridKey].forEach((el, index) => {
+        let status =
+          typeof el === 'string'
+            ? el
+            : typeof el[1] === 'number'
+            ? 'alive'
+            : el[1];
         boardgrid.push(
           <div key={`${gridKey}-${index}`} className={classes.gridEl}>
-            <Cell dataRow={gridKey} dataCol={index} />
+            <Cell dataRow={gridKey} dataCol={index} status={status} />
           </div>
         );
       });

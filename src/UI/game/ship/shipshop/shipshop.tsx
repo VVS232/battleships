@@ -15,11 +15,15 @@ function shipshop(props: props) {
         for (let i = 0; i < el.length; i++) {
           ship.push(
             <div key={index + i} className={classes.shipCell}>
-              <Cell />
+              <Cell status="alive" />
             </div>
           );
         }
-        return <div>{ship}</div>;
+        return (
+          <div draggable={true} className={classes.ship}>
+            {ship}
+          </div>
+        );
       })}
     </div>
   );

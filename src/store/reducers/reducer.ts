@@ -8,6 +8,8 @@ const initialState: game = {
   isFinished: false,
 };
 
+initialState.board2.placeShipsRandomly();
+
 const reducer = (state: game = initialState, action: any): game => {
   switch (action.type) {
     case '':
