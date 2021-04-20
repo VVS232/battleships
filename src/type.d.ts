@@ -1,25 +1,7 @@
 import Ship from './gameLogic/ship/ship';
 interface game {
-  readonly board1: {
-    readonly grid: grid;
-    readonly hit: (position: [keyof grid, keyof grid]) => void;
-    readonly placeShip: (
-      shiplength: number,
-      position: [keyof grid, keyof grid],
-      direction: 'v' | 'h'
-    ) => 1 | undefined;
-    readonly isLost: boolean;
-  };
-  readonly board2: {
-    readonly grid: grid;
-    readonly hit: (position: [keyof grid, keyof grid]) => void;
-    readonly placeShip: (
-      shiplength: number,
-      position: [keyof grid, keyof grid],
-      direction: 'v' | 'h'
-    ) => 1 | undefined;
-    readonly isLost: boolean;
-  };
+  readonly board1: board;
+  readonly board2: board;
   readonly playerTurn: 1 | 2;
   readonly isFinished: boolean;
 }
@@ -46,6 +28,7 @@ type board = {
   ): 1 | undefined;
   hit(position: [keyof grid, keyof grid]): void;
   isLost: boolean;
+  shop: Array<{ length: number; direction: 'v' | 'h' }>;
 };
 
 type RootState = game;

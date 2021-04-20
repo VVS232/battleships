@@ -1,10 +1,11 @@
-import react from 'react';
+import React, { ReactNode } from 'react';
 import classes from './board.module.css';
-import Ship from '../ship/ship';
+import Cell from '../ship/cell';
 import { board, grid } from '../../../type';
 
 type props = {
   board: board;
+  children?: ReactNode;
 };
 function Board(props: props) {
   function createGrid() {
@@ -14,14 +15,19 @@ function Board(props: props) {
       props.board.grid[gridKey].forEach((el, index) => {
         boardgrid.push(
           <div key={`${gridKey}-${index}`} className={classes.gridEl}>
-            <Ship dataRow={gridKey} dataCol={index} />
+            <Cell dataRow={gridKey} dataCol={index} />
           </div>
         );
       });
     }
     return boardgrid;
   }
-  return <div className={classes.board}>{createGrid().map((el) => el)}</div>;
+  return (
+    <div className={classes.board}>
+      {createGrid().map((el) => el)}
+      <div>{props.children}</div>
+    </div>
+  );
 }
 
 export default Board;

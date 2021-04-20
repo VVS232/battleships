@@ -1,5 +1,6 @@
+import { board } from '../../type';
 import Ship from '../ship/ship';
-export default function gameBoard() {
+export default function gameBoard(): board {
   const grid: grid = {
     1: Array(10).fill('empty'),
     2: Array(10).fill('empty'),
@@ -50,6 +51,48 @@ export default function gameBoard() {
       this.isLost = checkLost(this.grid);
     },
     isLost: false,
+    shop: [
+      {
+        length: 4,
+        direction: 'v',
+      },
+      {
+        length: 3,
+        direction: 'v',
+      },
+      {
+        length: 3,
+        direction: 'v',
+      },
+      {
+        length: 2,
+        direction: 'v',
+      },
+      {
+        length: 2,
+        direction: 'v',
+      },
+      {
+        length: 2,
+        direction: 'v',
+      },
+      {
+        length: 1,
+        direction: 'v',
+      },
+      {
+        length: 1,
+        direction: 'v',
+      },
+      {
+        length: 1,
+        direction: 'v',
+      },
+      {
+        length: 1,
+        direction: 'v',
+      },
+    ],
   };
 }
 

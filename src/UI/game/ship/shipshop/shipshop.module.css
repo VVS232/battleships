@@ -1,0 +1,12 @@
+.shipshop{
+    display: flex;
+    height: 160px;
+    width: 400px;
+}
+.shipCell{
+    height: 40px;
+    width:40px
+}
+.shipCell img{
+    width: 100%;
+}
