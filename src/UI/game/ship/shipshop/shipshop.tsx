@@ -3,9 +3,12 @@ import classes from './shipshop.module.css';
 import { connect } from 'react-redux';
 import { RootState } from '../../../../type';
 import Cell from '../cell';
+import { turnShip } from '../../../../store/actionCreators';
+import { AppDispatch } from '../../../../app/store';
 
 type props = {
   shop: Array<{ length: number; direction: 'v' | 'h' }>;
+  turn(index: number): void;
 };
 function shipshop(props: props) {
   return (
@@ -20,7 +23,17 @@ function shipshop(props: props) {
           );
         }
         return (
-          <div draggable={true} className={classes.ship}>
+          <div
+            style={
+              props.shop[index].direction === 'h'
+                ? { flexDirection: 'row' }
+                : { flexDirection: 'column' }
+            }
+            key={index}
+            draggable={true}
+            className={classes.ship}
+            onClick={() => props.turn(index)}
+          >
             {ship}
           </div>
         );
@@ -34,4 +47,10 @@ const mapStateToProps = (state: RootState) => {
   };
 };
 
-export default connect(mapStateToProps)(shipshop);
+function mapDispatchToProps(dispatch: AppDispatch) {
+  return {
+    turn: (index: number) => dispatch(turnShip(index)),
+  };
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(shipshop);

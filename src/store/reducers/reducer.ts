@@ -12,9 +12,10 @@ const initialState: game = {
 initialState.board2.placeShipsRandomly();
 
 const reducer = (state: game = initialState, action: any): game => {
+  let newState: game;
   switch (action.type) {
     case actions.MAKE_SHOT:
-      const newState: game = {
+      newState = {
         board1: { ...state.board1 },
         board2: { ...state.board2 },
         playerTurn: state.playerTurn,
@@ -22,11 +23,18 @@ const reducer = (state: game = initialState, action: any): game => {
       };
       newState.board2.hit(action.payload);
       return newState;
-      break;
-
+    case actions.TURN_SHIP:
+      newState = {
+        board1: { ...state.board1, shop: [...state.board1.shop] },
+        board2: { ...state.board2 },
+        playerTurn: state.playerTurn,
+        isFinished: state.isFinished,
+      };
+      newState.board1.shop[action.index].direction =
+        newState.board1.shop[action.index].direction === 'h' ? 'v' : 'h';
+      return newState;
     default:
       return state;
   }
-  return state;
 };
 export default reducer;

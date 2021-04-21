@@ -7,3 +7,10 @@ export function shoot(payload: [keyof grid, keyof grid]) {
     payload,
   };
 }
+
+export function turnShip(index: number) {
+  return {
+    type: actions.TURN_SHIP,
+    index,
+  };
+}

@@ -13,7 +13,7 @@
 }
 
 .ship{
-  
+  display: flex;
     cursor: grab;
 
 }
